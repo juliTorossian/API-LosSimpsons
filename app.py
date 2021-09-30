@@ -23,6 +23,10 @@ def get_frase_id(fraseId):
 def get_frase_personaje(personajeId):
     return jsonify(FraseMod.buscaFrasePersonaje(personajeId))
 
+@app.route('/personajes', methods=['GET'])
+def get_persoanjes():
+    return jsonify(FraseMod.buscarPerosnajes())
+
 @app.route('/imagen/<string:nombreIMG>')
 def get_image(nombreIMG):
     # return '<img src="./public/img/{}_550x550.jpg" alt="imagen">'.format(nombreIMG)

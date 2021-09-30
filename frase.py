@@ -76,23 +76,23 @@ class FraseMod():
         
         return frase
 
-    # def buscarPerosnajes():
-    #     personajes = []
-    #     conn = coneccion()
-    #     cursor = conn.cursor()
+    def buscarPerosnajes():
+        personajes = []
+        conn = coneccion()
+        cursor = conn.cursor()
         
-    #     query = 'SELECT fraseId, frase, personaje.persNombre FROM frase LEFT JOIN personaje ON frase.persId = personaje.persId WHERE personaje.persId = {}'.format(id)
+        query = 'SELECT persNombre FROM personaje WHERE persId = {}'.format(id)
 
-    #     cursor.execute(query)
-    #     rows = cursor.fetchall()
-    #     closeConn(conn)
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        closeConn(conn)
 
-    #     for row in rows:
-    #         # print(row)
-    #         imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ',''))
-    #         personajes.append({'id': row[0], 'nombre': row[1], 'imagen': imagenURL})
+        for row in rows:
+            # print(row)
+            imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ',''))
+            personajes.append({'id': row[0], 'nombre': row[1], 'imagen': imagenURL})
         
-    #     return personajes
+        return personajes
         
 
 
