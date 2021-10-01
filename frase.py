@@ -1,3 +1,4 @@
+from sqlite3.dbapi2 import Cursor, connect
 from conn import coneccion, closeConn
 import random
 
@@ -93,7 +94,41 @@ class FraseMod():
             personajes.append({'id': row[0], 'nombre': row[1], 'imagen': imagenURL})
         
         return personajes
+    
+    def capitulosPorTemporada(nroTemp):
+        caps = []
+        conn = coneccion()
+        cursor = conn.cursor()
+
+        query = 'SELECT * FROM capitulo WHERE capTemporada = {}'.format(nroTemp)
+
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        closeConn(conn)
+
+        for row in rows:
+            caps.append({'capNumero': row[1], 'capNombre': row[2], 'capTemporada': row[3], 'capDesc': row[4], 'capTime': row[5], 'capNroTot': row[6]})
         
+        return caps
+    
+    def capituloRandom():
+        caps = []
+        conn = coneccion()
+        cursor = conn.cursor()
+
+        cursor.execute('SELECT capNro FROM capitulo')
+        cant = len(cursor.fetchall())
+        
+        query = 'SELECT * FROM capitulo WHERE capNroTot = {}'.format(random.randrange(cant))
+
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        closeConn(conn)
+
+        for row in rows:
+            caps.append({'capNumero': row[1], 'capNombre': row[2], 'capTemporada': row[3], 'capDesc': row[4], 'capTime': row[5], 'capNroTot': row[6]})
+        
+        return caps
 
 
 class Frase():

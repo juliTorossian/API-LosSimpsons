@@ -33,6 +33,14 @@ def get_image(nombreIMG):
     return send_from_directory(os.getcwd() +'/public/img/{}_550x550.jpg'.format(nombreIMG),path='./public/img/{}_550x550.jpg'.format(nombreIMG) , filename=nombreIMG)
 
 
+@app.route('/capitulos/temporada/<int:tempNro>', methods=['GET'])
+def get_caps_temporada(tempNro):
+    return jsonify(FraseMod.capitulosPorTemporada(tempNro))
+
+@app.route('/capitulo/random', methods=['GET'])
+def get_cap_random():
+    return jsonify(FraseMod.capituloRandom())
+
 if __name__ == '__main__':
     app.run(host='192.168.0.172', port = 3000, debug = True)
 
