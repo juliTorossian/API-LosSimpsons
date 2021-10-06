@@ -1,6 +1,7 @@
 from sqlite3.dbapi2 import Cursor, connect
 from conn import coneccion, closeConn
 import random
+import base64
 
 class FraseMod():
 
@@ -16,11 +17,17 @@ class FraseMod():
         closeConn(conn)
 
         for row in rows:
-            frases.append({'id': row[0], 'frase': row[1], 'personaje': row[2]})
+            imagen = '{}_550x550.jpg'.format(row[2].replace(' ',''))
+            prefix = f'data:image/jpg;base64,'
+            with open('public\\img\\{}'.format(imagen), 'rb') as f:
+                img = f.read()
+            imagen64 = prefix + base64.b64encode(img).decode('utf-8')
+
+            frases.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagen64})
         
         return frases
     
-    def buscaFraseRandom():
+    def buscaFraseRandom(self):
         frase = []
         conn = coneccion()
         cursor = conn.cursor()
@@ -33,11 +40,15 @@ class FraseMod():
         cursor.execute(query)
         rows = cursor.fetchall()
         closeConn(conn)
-
         for row in rows:
             # print(row)
-            imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ','-'))
-            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagenURL})
+            imagen = '{}_550x550.jpg'.format(row[2].replace(' ',''))
+            prefix = f'data:image/jpg;base64,'
+            with open('public\\img\\{}'.format(imagen), 'rb') as f:
+                img = f.read()
+            imagen64 = prefix + base64.b64encode(img).decode('utf-8')
+
+            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagen64})
         
         return frase
 
@@ -54,10 +65,16 @@ class FraseMod():
 
         for row in rows:
             # print(row)
-            imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ','-'))
-            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagenURL})
-        
+            imagen = '{}_550x550.jpg'.format(row[2].replace(' ',''))
+            prefix = f'data:image/jpg;base64,'
+            with open('public\\img\\{}'.format(imagen), 'rb') as f:
+                img = f.read()
+            imagen64 = prefix + base64.b64encode(img).decode('utf-8')
+
+            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagen64})
+        rows[0][1]
         return frase
+
 
     def buscaFrasePersonaje(id):
         frase = []
@@ -72,8 +89,13 @@ class FraseMod():
 
         for row in rows:
             # print(row)
-            imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ','-'))
-            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagenURL})
+            imagen = '{}_550x550.jpg'.format(row[2].replace(' ',''))
+            prefix = f'data:image/jpg;base64,'
+            with open('public\\img\\{}'.format(imagen), 'rb') as f:
+                img = f.read()
+            imagen64 = prefix + base64.b64encode(img).decode('utf-8')
+            
+            frase.append({'id': row[0], 'frase': row[1], 'personaje': row[2], 'imagen': imagen64})
         
         return frase
 
@@ -82,7 +104,7 @@ class FraseMod():
         conn = coneccion()
         cursor = conn.cursor()
         
-        query = 'SELECT persNombre FROM personaje WHERE persId = {}'.format(id)
+        query = 'SELECT persNombre FROM personaje'
 
         cursor.execute(query)
         rows = cursor.fetchall()
@@ -90,8 +112,13 @@ class FraseMod():
 
         for row in rows:
             # print(row)
-            imagenURL = 'localhost:3000/imagen/{}'.format(row[2].replace(' ',''))
-            personajes.append({'id': row[0], 'nombre': row[1], 'imagen': imagenURL})
+            imagen = '{}_550x550.jpg'.format(row[0].replace(' ',''))
+            prefix = f'data:image/jpg;base64,'
+            with open('public\\img\\{}'.format(imagen), 'rb') as f:
+                img = f.read()
+            imagen64 = prefix + base64.b64encode(img).decode('utf-8')
+            
+            personajes.append({'nombre': row[0], 'imagen': imagen64})
         
         return personajes
     
@@ -123,9 +150,10 @@ class FraseMod():
 
         cursor.execute(query)
         rows = cursor.fetchall()
-        closeConn(conn)
 
+        closeConn(conn)
         for row in rows:
+            # print(row)
             caps.append({'capNumero': row[1], 'capNombre': row[2], 'capTemporada': row[3], 'capDesc': row[4], 'capTime': row[5], 'capNroTot': row[6]})
         
         return caps

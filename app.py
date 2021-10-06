@@ -1,46 +1,71 @@
 from flask import Flask, jsonify, render_template
 from flask.helpers import send_from_directory
+from flask.wrappers import Response
 from frase import FraseMod
 import os
 
 app = Flask('__name__')
 
+respuesta = Response()
+fraseMod = FraseMod()
+respuesta.headers['Access-Control-Allow-Origin'] = '*'
+
+#*#*#*#*#* /frases *#*#*#*#*#
+
 @app.route('/frases', methods=['GET'])
 def get_frases():
-    return jsonify(FraseMod.buscaFrases())
+    global respuesta
+    respuesta = jsonify(FraseMod.buscaFrases())
+    return respuesta
 
 @app.route('/frase', methods=['GET'])
 def get_frase_random():
-    respuesta = jsonify(FraseMod.buscaFraseRandom())
-    respuesta.headers['Access-Control-Allow-Origin'] = '*'
+    global respuesta
+    global fraseMod
+    respuesta = jsonify(fraseMod.buscaFraseRandom())
     return respuesta
 
 @app.route('/frase/<int:fraseId>', methods=['GET'])
 def get_frase_id(fraseId):
-    return jsonify(FraseMod.buscaFraseId(fraseId))
+    global respuesta
+    respuesta = jsonify(FraseMod.buscaFraseId(fraseId))
+    return respuesta
 
 @app.route('/frase/personaje/<int:personajeId>', methods=['GET'])
 def get_frase_personaje(personajeId):
-    return jsonify(FraseMod.buscaFrasePersonaje(personajeId))
+    global respuesta
+    respuesta = jsonify(FraseMod.buscaFrasePersonaje(personajeId))
+    return respuesta
+
+#*#*#*#*#* /personajes *#*#*#*#*#
 
 @app.route('/personajes', methods=['GET'])
 def get_persoanjes():
-    return jsonify(FraseMod.buscarPerosnajes())
+    global respuesta
+    respuesta = jsonify(FraseMod.buscarPerosnajes())
+    return respuesta
 
-@app.route('/imagen/<string:nombreIMG>')
-def get_image(nombreIMG):
-    # return '<img src="./public/img/{}_550x550.jpg" alt="imagen">'.format(nombreIMG)
-    return send_from_directory(os.getcwd() +'/public/img/{}_550x550.jpg'.format(nombreIMG),path='./public/img/{}_550x550.jpg'.format(nombreIMG) , filename=nombreIMG)
-
+#*#*#*#*#* /capitulos *#*#*#*#*#
 
 @app.route('/capitulos/temporada/<int:tempNro>', methods=['GET'])
 def get_caps_temporada(tempNro):
-    return jsonify(FraseMod.capitulosPorTemporada(tempNro))
+    global respuesta
+    respuesta = jsonify(FraseMod.capitulosPorTemporada(tempNro))
+    return respuesta
 
 @app.route('/capitulo/random', methods=['GET'])
 def get_cap_random():
-    return jsonify(FraseMod.capituloRandom())
+    global respuesta
+    respuesta = jsonify(FraseMod.capituloRandom())
+    return respuesta
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.172', port = 3000, debug = True)
+    app.run(host='localhost', port = 3000, debug = True)
 
