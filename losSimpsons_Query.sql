@@ -20,7 +20,12 @@ VALUES  ('Homero Simpson'),
         ('Helen Alegria'),
         ('Barney Gomez'),
         ('Abe Simpson'),
-        ('Homero Bart Marge Simpson')
+        ('Homero Bart Marge Simpson'),
+        ('Lisa Simpsons'),
+        ('Kirk Van Houten'),
+        ('Jefe Gorgory'),
+        ('Milhouse Van Houten'),
+        ('Lenny Leonard')
 ;
 
 INSERT INTO frase(frase, persId)
@@ -33,7 +38,32 @@ VALUES  ('A la grande le puse Cuca.', 1),
         ('¡Oh, no! ¡Elecciones! ¿Es uno de esos días en que cierran las tabernas, no es cierto?', 5),
         ('Vive deprisa, muere joven y deja un cadáver obeso.', 2),
         ('Mi Homero no es comunista. Podrá ser mentiroso, puerco, idiota, comunista, pero nunca una estrella de porno.', 6),
-        ('Niños: Hicieron su esfuerzo y fracasaron miserablemente. La lección es: nunca se esfuercen.', 1)
+        ('Niños: Hicieron su esfuerzo y fracasaron miserablemente. La lección es: nunca se esfuercen.', 1),
+        ('Me lo llevo... no lo tiene en rubio?', 1),
+        ('Es una tienda de pornografia, estaba comprando pornografia', 1),
+        ('9 papiros? yo invito', 2),
+        ('Estaba la pajara pinta a la sombra de verde limon, con el pico picaba la rama con las alas recoje la flor', 1),
+        ('No soy un estado, soy un monstruo!', 8),
+        ('Una cosa es que me insultes y denigres a tu familia, pero no te permito que le des de comer al perro en la mesa', 1),
+        ('Ve al baño a comerte flores', 2),
+        ('Ay, no se rian de mi, pueden tener un hijo igual!', 1),
+        ('Dignidad... No conoces la dignidad cuando la ves?', 9),
+        ('Si, pero yo lo digo con gracia', 1),
+        ('Ah, debe ser griego', 10),
+        ('Soy un pastelito horneado de canela', 1),
+        ('Sin television y sin cerveza Homero pierde la cabeza', 1),
+        ('Te acuerdas de Alf... volvio, en forma de fichas', 11),
+        ('No estoy fuera de lugar, tu estas fuera de lugar, todo el maldito sistema esta fuera de lugar', 1),
+        ('Quieres la verdad? quieres la verdad? tu no puedes manejar la verdad', 1),
+        ('Olvidalo Marge, esto es el Barrio Chino!', 1),
+        ('Duermo en un auto de carreras y tu?', 9),
+        ('Toma eso mamá, toma eso papá, quieren mandarme a un psiquiatra, no?, Tome esto Doctora Godines!', 11),
+        ('Bort? Ay quién va a llamarse Bort!', 2),
+        ('Que si que no el macalacachimba, que no que si el chafirete', 1),
+        ('Mamá, papá, Bart está muerto!', 8),
+        ('Momento. La maestra de Bart se apellida Krabappel, yo le decía clavado!', 1),
+        ('No digan como vivo por favor', 12),
+        ('Toma esto Washington, ahí va esto Einstein, terminó la función Shakespeare.', 1)
 ;
 
 SELECT * FROM personaje;
