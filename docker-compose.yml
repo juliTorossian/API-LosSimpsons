@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.http.routers.apilossimpsons.rule=Host(`apilossimpsons.rotom`)"
+
+networks:
+  traefik-net:
+    external: true
